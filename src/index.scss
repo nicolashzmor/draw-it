@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;600;800&Roboto:300,400,500,700&Material+Icons&display=swap');
+
+body {
+  font-family: 'Dosis', sans-serif, monospace;
+}
+
+.draw-it-container {
+  width: 100%;
+  height: 100vh;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+:root {
+  --otter-color: #E5D0FA;
+  --otter-gradiet: linear-gradient(90deg, #ECBDFD 0%, #E5D0FA 92.64%);
+  --panda-color: #9AC1C1;
+  --panda-gradient: linear-gradient(90deg, #9AC1C1 0%, #BAE8EB 92.64%);
+  --accent-color: #FFE6C3;
+  --accent-gradient: linear-gradient(180deg, #FFE6C3 0%, #FFF3E1 0.01%, #FFE6C3 98.44%);
+}
+

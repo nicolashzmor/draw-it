@@ -1,0 +1,15 @@
+.draw-it-team-icon {
+  border-radius: 50%;
+
+  &--large {
+    width: 100px;
+  }
+
+  &--medium {
+    width: 60px;
+  }
+
+  &--small {
+    width: 40px;
+  }
+}

@@ -1,0 +1,15 @@
+.TeamGrid {
+  flex: 1;
+  display: grid;
+  width: 100%;
+  max-height: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1em;
+  article {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 0.35em 0;
+  }
+}
