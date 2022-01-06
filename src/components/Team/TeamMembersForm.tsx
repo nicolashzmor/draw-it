@@ -39,11 +39,10 @@ const TeamMembersForm = ({background, members, onMembersChange: setMembers}: Tea
     return (
         <div className={styles.drawItTeamForm} style={{background: background}}>
             {members.map((member, index) =>
-                <div className={styles.drawItTeamForm__field_container}>
+                <div key={index} className={styles.drawItTeamForm__field_container}>
                     <span>{index + 1} - </span>
                     <TextField
                         className={styles.drawItTeamForm__field}
-                        key={index}
                         value={member}
                         label="Nombre"
                         variant="standard"
