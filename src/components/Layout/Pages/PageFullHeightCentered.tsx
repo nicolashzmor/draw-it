@@ -2,7 +2,7 @@ import './pages.scss';
 import React from 'react';
 import {PageProps} from "./pages.declarations";
 
-const PageFullHeightCentered = ({className, children}: PageProps) => {
+const PageFullHeightCentered: React.FC<PageProps> = ({className, children}) => {
     return (
         <div className={`draw-it-page draw-it-page--full-height-centered ${className}`}>
             {children}
