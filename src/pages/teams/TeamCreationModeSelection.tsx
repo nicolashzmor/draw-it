@@ -10,9 +10,9 @@ const TeamCreationModeSelection = () => {
     return (
         <PageFullHeightCentered className={styles.drawItTeamCreationMode}>
             <>
-                <TitleWithBackground styles={{color: 'rgba(0,0,0,0.6)', fontWeight: 600}}
+                <TitleWithBackground styles={{color: 'rgba(0,0,0,0.6)', fontWeight: 600 }}
                                      background={TeamSelectionModeSelectionBackground}>
-                    <h1>Arma los equipos</h1>
+                    <h2>Arma los equipos</h2>
                 </TitleWithBackground>
                 <Link to="/teams/random"><Button>Aleatorio</Button></Link>
                 <Link to="/teams/manual"><Button>Manual</Button></Link>

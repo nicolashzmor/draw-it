@@ -2,7 +2,16 @@
 
 body {
   font-family: 'Dosis', sans-serif, monospace;
+   margin: 0;
+  padding: 0;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+h1 { font-size: 1.5em }
+h2 { font-size: 1.2em; font-weight: 600 }
 
 .draw-it-container {
   width: 100%;
