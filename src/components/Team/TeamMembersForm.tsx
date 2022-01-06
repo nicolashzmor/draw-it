@@ -1,5 +1,5 @@
 import styles from './TeamMembersForm.module.scss';
-import React, {Dispatch, useRef} from 'react';
+import React, {Dispatch} from 'react';
 import {TextField} from "@mui/material";
 
 interface TeamMembersFormProps {
@@ -9,8 +9,6 @@ interface TeamMembersFormProps {
 }
 
 const TeamMembersForm = ({background, members, onMembersChange: setMembers}: TeamMembersFormProps) => {
-
-    const inputRef = useRef<HTMLInputElement>(null);
 
     const addMember = (member: string, target: EventTarget) => {
         if (member === '') return;
@@ -54,10 +52,9 @@ const TeamMembersForm = ({background, members, onMembersChange: setMembers}: Tea
                 </div>)
             }
             <div className={styles.drawItTeamForm__field_container}>
-                <span>{ members.length + 1} -</span>
+                <span>{members.length + 1} -</span>
                 <TextField
                     className={styles.drawItTeamForm__field}
-                    ref={inputRef}
                     label="Nombre"
                     variant="standard"
                     onBlur={(event) => addMember(event.target.value, event.target)}
