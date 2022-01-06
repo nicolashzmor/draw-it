@@ -13,7 +13,7 @@ function Home() {
                 <TitleWithBackground background={HomeBackground}>
                     <h1>Draw it!</h1>
                 </TitleWithBackground>
-                <Link to="/mode-selection"><Button>Empezar Partida</Button></Link>
+                <Link to="/teams/mode-selection"><Button>Empezar Partida</Button></Link>
             </>
         </PageFullHeightCentered>
     );

@@ -11,7 +11,7 @@ function App() {
         <div className="App draw-it-container">
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/mode-selection" element={<TeamCreationModeSelection />} />
+                <Route path="/teams/mode-selection" element={<TeamCreationModeSelection />} />
                 <Route path="/teams/manual" element={<TeamManualCreation />} />
                 <Route path="/teams/random" element={<TeamRandomCreation />} />
                 <Route path="/teams/ready" element={<TeamReady />} />
