@@ -3,7 +3,7 @@ import React from 'react';
 
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement>{
     children: string;
-    mode?: 'primary' | 'success'
+    mode?: 'primary' | 'success' | 'neutral'
     type?: 'button' | 'submit' | 'reset'
 }
 

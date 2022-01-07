@@ -8,13 +8,18 @@
   font-weight: 800;
   color: rgba(0,0,0,0.6);
   padding: 0.3em 1em;
+  margin: 0.25em;
 
   &--primary {
     background: linear-gradient(180deg, #FFE6C3 0%, #FFF3E1 0.01%, #FFE6C3 98.44%);
     border: 1px solid #FFE6C3;
   }
   &--success {
-    background: linear-gradient(180deg, #90ED8F 0%, #D5F5D5 0.01%, #90ED8F 98.44%);
+    background: var(--success-gradient);
     border: 1px solid #90ED8F;
+  }
+  &--neutral {
+    background: transparent;
+    border: 1px solid transparent;
   }
 }

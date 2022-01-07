@@ -1,10 +1,11 @@
 import React from 'react';
+import styles from './GameCard.module.scss';
 
-const GameCard = () => {
+const GameCard = ({word}: { word: string }) => {
     return (
-        <div>
-            
-        </div>
+        <section className={styles.GameCard}>
+            <h1 className={styles.GameCard__word}>{word}</h1>
+        </section>
     );
 };
 

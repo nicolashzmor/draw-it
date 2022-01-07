@@ -1,6 +1,6 @@
-import {ReactElement} from "react";
+import {CSSProperties} from "react";
 
 export interface PageProps {
-    children: ReactElement;
     className?: string;
+    customStyles?: CSSProperties;
 }

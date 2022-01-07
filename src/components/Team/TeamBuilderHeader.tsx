@@ -19,7 +19,7 @@ const TeamBuilderHeader = ({activeTeam, onSwitchTeam}: TeamBuilderHeaderProps) =
     return (
         <>
             <div className={styles.teamBuilderHeader}>
-                <TeamLabel icon={getActiveTeamData().icon} name={getActiveTeamData().name}/>
+                <TeamLabel icon={getActiveTeamData().icon} label={`Team ${getActiveTeamData().name}`}/>
                 <RiSwapLine onClick={() => (onSwitchTeam || (noop))(getInactiveTeamData().key)} size={24}
                             style={{transform: 'rotate(90deg)'}}/>
                 <TeamIcon size={'small'} icon={getInactiveTeamData().icon} name={getInactiveTeamData().name}/>

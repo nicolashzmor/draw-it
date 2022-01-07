@@ -13,6 +13,7 @@ const TeamReady = () => {
     const Teams = useSelector<AppStore, InGameTeam[]>(({game}) => Object.values(game.teams))
     const TeamA = Teams[0];
     const TeamB = Teams[1];
+
     const TeamAValues = TeamValues.find(v => v.key === Teams[0].key)
     const TeamBValues = TeamValues.find(v => v.key === Teams[1].key)
 
@@ -22,7 +23,7 @@ const TeamReady = () => {
                 <TeamLabel
                     className={styles.drawItTeamsReady__team_label}
                     icon={TeamAValues?.icon || ''}
-                    name={TeamAValues?.name || ''}
+                    label={`Team ${TeamAValues?.name || ''}`}
                 />
                 <TeamGrid
                     members={TeamA.members}
@@ -34,7 +35,7 @@ const TeamReady = () => {
                 <TeamLabel
                     className={styles.drawItTeamsReady__team_label}
                     icon={TeamBValues?.icon || ''}
-                    name={TeamBValues?.name || ''}
+                    label={`Team ${TeamBValues?.name || ''}`}
                 />
                 <TeamGrid
                     members={TeamB.members}

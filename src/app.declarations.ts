@@ -6,6 +6,7 @@ export enum TEAM {
 export interface ITeamConfig {
     key: string;
     name: string;
+    slug: string;
     mainColor: string;
     icon: string;
 }

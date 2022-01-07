@@ -1,0 +1,25 @@
+.gameNextPlayer {
+  h2 { margin-bottom: 0 }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    align-self: flex-start;
+  }
+  &__player_name {
+    margin: 0 auto 1.5em;
+  }
+  &__timer {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--accent-color);
+    border-radius: 50%;
+    font-size: 1.4em;
+    font-weight: 800;
+  }
+
+}

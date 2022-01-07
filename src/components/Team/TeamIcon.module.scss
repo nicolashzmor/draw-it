@@ -1,6 +1,14 @@
 .draw-it-team-icon {
   border-radius: 50%;
 
+  &--jumbo {
+    width: 300px;
+  }
+
+  &--xlarge {
+    width: 140px;
+  }
+
   &--large {
     width: 100px;
   }

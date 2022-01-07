@@ -1,12 +1,17 @@
 import './pages.scss';
+import styles from './PageFullHeightCentered.module.scss';
 import React from 'react';
 import {PageProps} from "./pages.declarations";
 
-const PageFullHeightCentered: React.FC<PageProps> = ({className, children}) => {
+
+
+const PageFullHeightCentered: React.FC<PageProps> = ({className, children, customStyles}) => {
     return (
-        <div className={`draw-it-page draw-it-page--full-height-centered ${className}`}>
-            {children}
-        </div>
+        <main className={`${styles.PageFullHeightCentered} ${className}`} style={customStyles}>
+            <div className={styles.PageFullHeightCentered__container}>
+                {children}
+            </div>
+        </main>
     );
 };
 
