@@ -1,34 +1,55 @@
 import React from 'react';
-import {ITeamConfig, TEAM} from "../../app.declarations";
-import {useSelector} from "react-redux";
+import {InGameRound} from "../../app.declarations";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStore} from "../../store/store";
-import {TeamsValuesMap} from "../../app.values";
 import PageFullHeightCentered from "../../components/Layout/Pages/PageFullHeightCentered";
 import styles from "./GameNextPlayer.module.scss";
 import Button from "../../components/Shared/Button";
 import TeamLabel from "../../components/Team/TeamLabel";
 import GameCard from "../../components/Game/GameCard";
+import {useSecondsTimer} from "../../components/Game/SecondsTimer.hook";
+import {useNavigate} from "react-router-dom";
+import {GameActions} from "../../store/game.state";
+import {useGameReady} from "../../components/Game/GameReady.hook";
 
 
 const GameActiveRound = () => {
-    const activeTeam: ITeamConfig = useSelector<AppStore, ITeamConfig>(({game}) => {
-        return TeamsValuesMap[TEAM.PANDA]
+
+    useGameReady()
+
+    const navigate = useNavigate()
+    const dispatcher = useDispatch()
+
+    const timer = useSecondsTimer(3, () => {
+        dispatcher(GameActions.loseRound())
+        navigate('/game/timeout')
+    })
+
+    const round: InGameRound = useSelector<AppStore, InGameRound>(({game}) => {
+        if (!game.round) {
+            return {} as any;
+        }
+        return game.round;
     });
-    const activePlayer = 'Nico';
-    const remainingTime = 60;
+
+    const handleGuessedWord = () => {
+        dispatcher(GameActions.winRound())
+        navigate('/game/next-player')
+    }
+
     return (
         <PageFullHeightCentered
             className={styles.gameNextPlayer}
-            customStyles={{background: `var(--${activeTeam.slug}-gradient)`}}
+            customStyles={{background: `var(--${round.activeTeam.slug}-gradient)`}}
         >
             <>
                 <header className={styles.gameNextPlayer__header}>
-                    <TeamLabel icon={activeTeam.icon} label={activePlayer}/>
+                    <TeamLabel icon={round.activeTeam.icon} label={round.currentPlayer}/>
 
-                    <span className={styles.gameNextPlayer__timer}>{remainingTime}</span>
+                    <span className={styles.gameNextPlayer__timer}>{timer.remaining}</span>
                 </header>
-                <GameCard word={"Conectar"}/>
-                <Button mode="primary">¡Adivinado!</Button>
+                <GameCard word={round.word}/>
+                <Button onClick={handleGuessedWord} mode="primary">¡Adivinado!</Button>
             </>
         </PageFullHeightCentered>
     );

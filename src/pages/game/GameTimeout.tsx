@@ -3,6 +3,7 @@ import PageFullHeightCentered from "../../components/Layout/Pages/PageFullHeight
 import TimeoutImage from "../../assets/background-timeout.png";
 import ImageWithCenteredCaption from "../../components/Shared/ImageWithCenteredCaption";
 import Button from "../../components/Shared/Button";
+import {Link} from "react-router-dom";
 
 const GameTimeout = () => {
     return (
@@ -11,7 +12,7 @@ const GameTimeout = () => {
         >
             <ImageWithCenteredCaption background={TimeoutImage}/>
             <h1>¡Se acabo el tiempo!</h1>
-            <Button mode="primary">Proxima ronda</Button>
+            <Link to={"/game/next-player"}><Button mode="primary">Proxima ronda</Button></Link>
         </PageFullHeightCentered>
     );
 };

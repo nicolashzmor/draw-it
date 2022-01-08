@@ -1,6 +1,8 @@
 import {ITeamConfig, TEAM} from "./app.declarations";
 import PandaIcon from './assets/SVG/panda.svg';
+import PandaWinningIcon from './assets/SVG/panda-winner.svg'
 import OtterIcon from './assets/SVG/otter.svg';
+import OtterWinningIcon from './assets/SVG/otter-winner.svg'
 
 export const TeamsValuesMap: Record<TEAM, ITeamConfig> = {
     [TEAM.OTTER]: {
@@ -8,14 +10,16 @@ export const TeamsValuesMap: Record<TEAM, ITeamConfig> = {
         name: 'Otter',
         slug: 'otter',
         mainColor: '#E5D0FA',
-        icon: OtterIcon
+        icon: OtterIcon,
+        winningIcon: OtterWinningIcon
     },
     [TEAM.PANDA]: {
         key: TEAM.PANDA,
         name: 'Panda',
         slug: 'panda',
         mainColor: '#9AC1C1',
-        icon: PandaIcon
+        icon: PandaIcon,
+        winningIcon: PandaWinningIcon
     }
 }
 
