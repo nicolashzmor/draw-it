@@ -31,6 +31,7 @@ export interface GameState {
     winner: InGameTeam | null
     winningScore: number
     maxRounds: number
+    timePerRound: number
     rounds: number
     configured: boolean
 }

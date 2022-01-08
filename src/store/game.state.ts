@@ -28,8 +28,9 @@ const initialState: GameState = {
     },
     round: null,
     winner: null,
-    winningScore: 3,
+    winningScore: 15,
     maxRounds: 20,
+    timePerRound: 60,
     rounds: 0,
     configured: false
 }
@@ -42,6 +43,7 @@ export const initGame = createAction<void>('game/initGame')
 export const winRound = createAction<void>('game/winRound')
 export const loseRound = createAction<void>('game/loseRound')
 export const resetScores = createAction<void>('game/resetScores')
+export const resetAll = createAction<void>('game/resetAll')
 
 export const GameActions = {
     changeActiveTeam,
@@ -50,7 +52,8 @@ export const GameActions = {
     initGame,
     loseRound,
     winRound,
-    resetScores
+    resetScores,
+    resetAll
 }
 
 export const GameReducer = createReducer<GameState>(initialState, (builder) => {
@@ -99,5 +102,6 @@ export const GameReducer = createReducer<GameState>(initialState, (builder) => {
                 state.activeTeam = RandomTeamKey()
                 state.round = nextRound(state)
             })
+            .addCase(resetAll, () => initialState)
     }
 )

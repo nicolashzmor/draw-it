@@ -19,8 +19,8 @@ const GameActiveRound = () => {
 
     const navigate = useNavigate()
     const dispatcher = useDispatch()
-
-    const timer = useSecondsTimer(3, () => {
+    const timePerRound = useSelector<AppStore, number>(({game}) => game.timePerRound)
+    const timer = useSecondsTimer(timePerRound, () => {
         dispatcher(GameActions.loseRound())
         navigate('/game/timeout')
     })

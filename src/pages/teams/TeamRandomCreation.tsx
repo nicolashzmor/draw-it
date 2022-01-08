@@ -12,7 +12,7 @@ import PageFullHeightCentered from "../../components/Layout/Pages/PageFullHeight
 const TeamRandomCreation = () => {
     const navigate = useNavigate()
     const dispatcher = useDispatch()
-    const [members, updateMembers] = useState<string[]>(['Nico', 'Kata', 'Jose', 'Juan'])
+    const [members, updateMembers] = useState<string[]>([])
 
     const submitTeamsAndNavigate = () => {
         dispatcher(GameActions.setupTeams(getRandomTeams()))

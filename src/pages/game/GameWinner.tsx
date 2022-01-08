@@ -29,6 +29,11 @@ const GameWinner = () => {
         navigate('/game/next-player')
     }
 
+    const handleSetupTeamsAgain = () => {
+        dispatcher(GameActions.resetAll())
+        navigate('/teams/mode-selection')
+    }
+
     return (
         <PageFullHeightCentered
             className={styles.GameWinner}
@@ -39,7 +44,7 @@ const GameWinner = () => {
                 <h1>¡El equipo {Winner.name} ha ganado!</h1>
                 <footer className={styles.GameWinner__footer}>
                     <Button onClick={handleRematch} mode="success">¡Revancha!</Button>
-                    <Button mode="neutral">Rearmar equipos</Button>
+                    <Button onClick={handleSetupTeamsAgain} mode="neutral">Rearmar equipos</Button>
                 </footer>
             </>
         </PageFullHeightCentered>
