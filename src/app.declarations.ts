@@ -30,6 +30,8 @@ export interface GameState {
     round: InGameRound | null
     winner: InGameTeam | null
     winningScore: number
+    words: string[]
+    nextWord: string
     maxRounds: number
     timePerRound: number
     rounds: number

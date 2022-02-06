@@ -2,12 +2,14 @@ import {createAction, createReducer} from "@reduxjs/toolkit";
 import {GameState, InGameRound, InGameTeam, TEAM} from "../app.declarations";
 import {TeamsValuesMap} from "../app.values";
 import {reduce, sample, shuffle} from "lodash";
+import allWords from './all.json';
+import _shuffle from "lodash/shuffle";
 
-function RandomTeamKey(): TEAM {
+function randomTeamKey(): TEAM {
     return sample(Object.values(TEAM)) as TEAM
 }
 
-function SwitchTeamKey(team: TEAM): TEAM {
+function switchTeamKey(team: TEAM): TEAM {
     return Object.values(TEAM).find(t => t !== team) as TEAM
 }
 
@@ -15,17 +17,24 @@ function nextRound(state: GameState): InGameRound {
     const nextTeam = state.teams[state.activeTeam];
     return {
         activeTeam: nextTeam,
-        word: `Word ${Math.floor(Math.random() * 1000)}`,
+        word: state.nextWord,
         currentPlayer: nextTeam.members[nextTeam.currentPlayerPosition] || 'No Player Selected'
     }
 }
 
+function setupNextWord(state: GameState): GameState {
+    state.nextWord = state.words.shift() || 'HELLO';
+    return state;
+}
+
 const initialState: GameState = {
-    activeTeam: RandomTeamKey(),
+    activeTeam: randomTeamKey(),
     teams: {
         [TEAM.OTTER]: {...TeamsValuesMap[TEAM.OTTER], members: [], score: 0, currentPlayerPosition: 0},
         [TEAM.PANDA]: {...TeamsValuesMap[TEAM.PANDA], members: [], score: 0, currentPlayerPosition: 0}
     },
+    words: _shuffle(allWords),
+    nextWord: 'NO_SELECTED_WORD',
     round: null,
     winner: null,
     winningScore: 15,
@@ -34,6 +43,7 @@ const initialState: GameState = {
     rounds: 0,
     configured: false
 }
+
 // GAME SETUP
 export const changeActiveTeam = createAction<TEAM>('game/changeActiveTeam')
 export const setupTeams = createAction<Record<TEAM, string[]>>('game/setupTeams')
@@ -65,10 +75,13 @@ export const GameReducer = createReducer<GameState>(initialState, (builder) => {
                 state.configured = true;
             })
             .addCase(initGame, (state) => {
+                // let draft = cloneDeep(state)
+                setupNextWord(state)
                 state.round = nextRound(state)
             })
             .addCase(loseRound, (state) => {
-                state.activeTeam = SwitchTeamKey(state.activeTeam)
+                state = setupNextWord(state)
+                state.activeTeam = switchTeamKey(state.activeTeam)
                 state.round = nextRound(state)
             })
             .addCase(winRound, (state) => {
@@ -83,7 +96,7 @@ export const GameReducer = createReducer<GameState>(initialState, (builder) => {
                 if (activeTeam.score >= state.winningScore) {
                     state.winner = state.teams[state.activeTeam];
                 }
-
+                state = setupNextWord(state)
                 state.round = nextRound(state)
             })
             .addCase(resetScores, (state) => {
@@ -99,7 +112,9 @@ export const GameReducer = createReducer<GameState>(initialState, (builder) => {
                         }
                     }
                 }, {}) as Record<TEAM, InGameTeam>
-                state.activeTeam = RandomTeamKey()
+                state.activeTeam = randomTeamKey()
+                state.words = _shuffle(allWords)
+                state = setupNextWord(state)
                 state.round = nextRound(state)
             })
             .addCase(resetAll, () => initialState)

@@ -12,7 +12,7 @@ import PageFullHeightCentered from "../../components/Layout/Pages/PageFullHeight
 const TeamRandomCreation = () => {
     const navigate = useNavigate()
     const dispatcher = useDispatch()
-    const [members, updateMembers] = useState<string[]>([])
+    const [members, updateMembers] = useState<string[]>(['Nico', 'Kata', 'Sebas', 'Yann', 'Nacho'])
 
     const submitTeamsAndNavigate = () => {
         dispatcher(GameActions.setupTeams(getRandomTeams()))
@@ -20,7 +20,8 @@ const TeamRandomCreation = () => {
     }
     const getRandomTeams = () => {
         const shuffled = _shuffle(members);
-        const chunks = _chunk(shuffled, Math.floor(members.length / 2));
+        const chunks = _chunk(shuffled, Math.ceil(members.length / 2));
+        console.log(chunks)
         return {
             [TEAM.PANDA]: chunks[0],
             [TEAM.OTTER]: chunks[1]
