@@ -27,13 +27,21 @@ function setupNextWord(state: GameState): GameState {
     return state;
 }
 
+function setupNextPlayer(activeTeam: InGameTeam): InGameTeam{
+    activeTeam.currentPlayerPosition =
+        activeTeam.currentPlayerPosition >= activeTeam.members.length - 1
+            ? 0
+            : activeTeam.currentPlayerPosition + 1;
+    return activeTeam
+}
+
 const initialState: GameState = {
     activeTeam: randomTeamKey(),
     teams: {
         [TEAM.OTTER]: {...TeamsValuesMap[TEAM.OTTER], members: [], score: 0, currentPlayerPosition: 0},
         [TEAM.PANDA]: {...TeamsValuesMap[TEAM.PANDA], members: [], score: 0, currentPlayerPosition: 0}
     },
-    words: _shuffle(allWords),
+    words: _shuffle(_shuffle(_shuffle(allWords))),
     nextWord: 'NO_SELECTED_WORD',
     round: null,
     winner: null,
@@ -52,6 +60,8 @@ export const setupTeams = createAction<Record<TEAM, string[]>>('game/setupTeams'
 export const initGame = createAction<void>('game/initGame')
 export const winRound = createAction<void>('game/winRound')
 export const loseRound = createAction<void>('game/loseRound')
+export const skipWord = createAction<void>('game/skipWord')
+export const skipRound = createAction<void>('game/skipRound')
 export const resetScores = createAction<void>('game/resetScores')
 export const resetAll = createAction<void>('game/resetAll')
 
@@ -61,6 +71,8 @@ export const GameActions = {
     // IN GAME
     initGame,
     loseRound,
+    skipWord,
+    skipRound,
     winRound,
     resetScores,
     resetAll
@@ -75,23 +87,24 @@ export const GameReducer = createReducer<GameState>(initialState, (builder) => {
                 state.configured = true;
             })
             .addCase(initGame, (state) => {
-                // let draft = cloneDeep(state)
                 setupNextWord(state)
                 state.round = nextRound(state)
             })
             .addCase(loseRound, (state) => {
                 state = setupNextWord(state)
+                state.teams[state.activeTeam] = setupNextPlayer(state.teams[state.activeTeam])
                 state.activeTeam = switchTeamKey(state.activeTeam)
+                state.round = nextRound(state)
+            })
+            .addCase(skipWord, (state) => {
+                state = setupNextWord(state)
                 state.round = nextRound(state)
             })
             .addCase(winRound, (state) => {
                 if (!state.round) throw Error('Round not initialized');
                 const activeTeam = state.teams[state.activeTeam];
                 activeTeam.score += 1;
-                activeTeam.currentPlayerPosition =
-                    activeTeam.currentPlayerPosition >= activeTeam.members.length - 1
-                        ? 0
-                        : activeTeam.currentPlayerPosition + 1;
+                state.teams[state.activeTeam] = setupNextPlayer(activeTeam)
 
                 if (activeTeam.score >= state.winningScore) {
                     state.winner = state.teams[state.activeTeam];

@@ -37,6 +37,15 @@ const GameActiveRound = () => {
         navigate('/game/next-player')
     }
 
+    const handleSkipRound = () => {
+        dispatcher(GameActions.loseRound())
+        navigate('/game/timeout')
+    }
+
+    const handleSkipWord = () => {
+        dispatcher(GameActions.skipWord())
+    }
+
     return (
         <PageFullHeightCentered
             className={styles.gameNextPlayer}
@@ -49,7 +58,9 @@ const GameActiveRound = () => {
                     <span className={styles.gameNextPlayer__timer}>{timer.remaining}</span>
                 </header>
                 <GameCard word={round.word}/>
-                <Button onClick={handleGuessedWord} mode="primary">¡Adivinado!</Button>
+                <Button onClick={handleGuessedWord} mode="success">¡Adivinado!</Button>
+                <Button onClick={handleSkipWord} mode="primary">Pasar Palabra</Button>
+                <Button onClick={handleSkipRound} mode="primary">Pasar Ronda</Button>
             </>
         </PageFullHeightCentered>
     );

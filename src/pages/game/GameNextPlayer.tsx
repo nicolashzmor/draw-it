@@ -11,6 +11,7 @@ import {InGameRound, InGameTeam} from "../../app.declarations";
 const GameNextPlayer = () => {
     const navigate = useNavigate()
     const winner = useSelector<AppStore, InGameTeam | null>(({game}) => game.winner)
+
     const round: InGameRound = useSelector<AppStore, InGameRound>(({game}) => {
         if (!game.round) throw Error('Cannot initialize the game without a round')
         return game.round
@@ -28,6 +29,7 @@ const GameNextPlayer = () => {
         >
             <>
                 <TeamIcon icon={round.activeTeam.icon} name={round.currentPlayer} size="jumbo"/>
+                <small>Puntaje: { round.activeTeam.score } pts</small>
                 <h2>Dibuja</h2>
                 <h1 className={styles.gameNextPlayer__player_name}>{round.currentPlayer}</h1>
                 <Link to="/game/round">
